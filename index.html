@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Dalira</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/vs.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/main.css">
+  <meta name="robots" content="noindex, follow">
+</head>
+
+<body>
+
+  <div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+      <div class="sticky">
+        <div class="custom-menu">
+          <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+          </button>
+        </div>
+        <div class="p-4 pt-5">
+          <h1><a href="index.html" class="logo">Dalira</a></h1>
+          <ul class="list-unstyled components mb-5">
+            <li>
+              <a href="#introduction">Introduction</a>
+            </li>
+            <li>
+              <a href="#gettingStarted">Getting Started</a>
+            </li>
+            <li>
+              <a href="#fileStructure">File Structure</a>
+            </li>
+            <li>
+              <a href="#starterTemplate">Starter Template</a>
+            </li>
+            <li>
+              <a href="#database">Database</a>
+            </li>
+            <li>
+              <a href="#crud">CRUD</a>
+            </li>
+            <li>
+              <a href="#examples">Examples</a>
+            </li>
+          </ul>
+  
+          <div class="footer">
+            <p>Copyright &copy; 2022 -
+              <script>document.write(new Date().getFullYear());</script> <br> All rights reserved | Dalira
+            </p>
+          </div>
+  
+        </div>
+      </div>
+     
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5 pt-5">
+      <!-- Introduction -->
+      <h2 id="introduction" class="mb-4">Introduction</h2>
+      <p>Dalira is a lightweight PHP framework designed for developers who value elegant syntax, rapid runtime performance, and clean architecture. It promotes a clear separation of concerns, making your web applications organized, maintainable, and scalable.</p>
+      
+      <!-- Getting Started -->
+      <h2 id="gettingStarted" class="mt-5 mb-4">Getting Started</h2>
+      <p>To begin using Dalira, follow these steps:</p>
+      <ol>
+        <li>Download the framework <a href="./file/dalira-framework-v1.0.0.rar" class="text-primary">here</a>.</li>
+        <li>Extract the files into your project directory.</li>
+        <li>Set up your database configuration in <span class="text-danger">config/db/connector.php</span>.</li>
+        <li>Start building your application!</li>
+      </ol>
+
+      <!-- File Structure -->
+      <h2 id="fileStructure" class="mt-5 mb-4">File Structure</h2>
+      <p>Dalira follows a clean and organized file structure to ensure maintainability and scalability:</p>
+      <pre><code class="language-html">
+dalira-template/
+├── app/
+│   ├── layout/
+│   ├── modals/
+│   └── models/
+├── config/
+│   └── db/
+└── public/
+    ├── css/
+    ├── img/
+    └── js/
+      </code></pre>
+
+      <!-- Starter Template -->
+      <h2 id="starterTemplate" class="mt-5 mb-4">Starter Template</h2>
+      <p>Create a new <span class="text-danger">filename.php</span> file in the root project. Include the <span class="text-danger">header.php</span> and <span class="text-danger">footer.php</span> files from a specified directory using their absolute paths. This method ensures that the files are included regardless of the current directory, allowing for consistent page structure.</p>
+      <div class="card">
+        <div class="card-header text-center"><small>filename.php</small></div>
+        <div class="card-body p-0">
+          <pre class="shadow-lg rounded mb-0"><code class="language-php hljs py-0">
+&lt;?php include realpath(__DIR__ . '/app/layout/header.php') ?&gt;
+&lt;h1&gt;Hello world!&lt;/h1&gt;
+&lt;?php include realpath(__DIR__ . '/app/layout/footer.php') ?&gt;
+          </code></pre>
+        </div>
+      </div>
+
+      <h2 class="mt-5 mb-4">CSS & JS Components</h2>
+      <p>Dalira utilizes <span class="text-primary">Bootstrap 5.0.2</span> as its primary styling framework. This allows for a responsive and modern design, leveraging Bootstrap's grid system and components.</p>
+      <p>To modify the styling or update the Bootstrap version, you can make changes in the <span class="text-danger">header.php</span> and the <span class="text-danger">footer.php</span> file.</p>
+      <h5>Steps to Change Bootstrap Version or Customize Styles</h5>
+      <p>1. Locate <span class="text-danger">header.php</span></p>
+      <ul>
+        <li>Look for the link to the Bootstrap CSS file, which typically appears as shown in the code below. You can either change or update it, or replace it with another CSS framework.</li>
+      </ul>
+      <div class="card">
+        <div class="card-header text-center"><small>app/layout/header.php</small></div>
+        <div class="card-body p-0">
+          <pre class="shadow-lg rounded mb-0"><code class="language-html hljs py-0">
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"&gt;
+          </code></pre>
+        </div>
+      </div>
+      <p class="pt-4">2. Locate <span class="text-danger">footer.php</span></p>
+      <ul>
+        <li>Locate the Bootstrap-related script, typically formatted as shown in the code below. This script is essential for Bootstrap's JavaScript functionality, and you can update it or replace it with another framework as needed.</li>
+      </ul>
+      <div class="card">
+        <div class="card-header text-center"><small>app/layout/footer.php</small></div>
+        <div class="card-body p-0">
+          <pre class="shadow-lg rounded mb-0"><code class="language-html hljs py-0">
+&lt;script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"&gt;&lt;/script&gt;
+          </code></pre>
+        </div>
+      </div>
+
+      <!-- Database -->
+      <h2 id="database" class="mt-5 mb-4">Database</h2>
+      <p>Setting up the database is simple just download the example database from <a href="./file/dalira.rar" class="text-primary">here</a> and import it on your phpmyadmin. After that, you'll need to update the <span class="text-danger">connector.php</span> file located in <span class="text-danger">config/db</span>. Change the private variable db to your desired database name.</p>
+      <p>The PHP code defines a class <span class="text-danger">DBConnection</span> with private properties for the database host, user, password, and database name, and includes a protected connect method that constructs a Data Source Name (DSN) to establish a connection using PDO. It handles exceptions by catching PDOException errors and printing them if they occur.</p>
+      <div class="card">
+        <div class="card-header text-center"><small>config/db/conn.php</small></div>
+        <div class="card-body p-0">
+          <pre class="shadow-lg rounded mb-0"><code class="language-php hljs py-0">
+&lt;?php
+
+class DBConnection
+{
+  private $host = "localhost";
+  private $user = "root";
+  private $pass = "";
+  private $db = "dalira";
+
+  protected function connect()
+  {
+    try {
+      $dsn = 'mysql:host=' &gt; . $this-&gt;host . ';dbname=' &gt; . $this-&gt;db;
+      $pdo = new PDO($dsn, $this-&gt;user, $this-&gt;pass);
+      $pdo-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      return $pdo;
+    } catch (PDOException $e) {
+      print_r($e);
+    }
+  }
+}
+
+?&gt; 
+          </code></pre>
+        </div>
+      </div>
+
+      <!-- CRUD -->
+      <h2 id="crud" class="mt-5 mb-4">CRUD</h2>
+      <p>CRUD (Create, Read, Update, Delete) operations form the backbone of data management in web applications, enabling developers to efficiently handle data lifecycles.</p>
+      <ul>
+        <li><span class="text-danger">Create</span> use for the addition of new records.</li>
+        <li><span class="text-danger">Read</span> use for the retrieval of created records.</li>
+        <li><span class="text-danger">Update</span> use for the modification of existing records.</li>
+        <li><span class="text-danger">Delete</span> use for the removal of existing records.</li>
+      </ul>
+
+      <!-- Examples -->
+      <h2 id="examples" class="mt-5 mb-4">Examples</h2>
+      <ul>
+        <li><a href="#" class="text-primary">Create Operation</a></li>
+        <li><a href="#" class="text-primary">Read Operation</a></li>
+        <li><a href="#" class="text-primary">Update Operation</a></li>
+        <li><a href="#" class="text-primary">Delete Operation</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
