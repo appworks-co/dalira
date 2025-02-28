@@ -8209,7 +8209,7 @@
   #sidebar {
     min-width: 250px;
     max-width: 250px;
-    height: 100vh;
+    height: 100%;
     background: #866ec7;
     color: #fff;
     -webkit-transition: all 0.3s;
@@ -8250,7 +8250,8 @@
         margin-left: -250px; }
         #sidebar.active {
           margin-left: 0;
-          height: 100vh; }
+          height: 100%;
+        }
         #sidebar .custom-menu {
           margin-right: -50px !important;
           top: 10px !important; } }
