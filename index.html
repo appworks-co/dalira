@@ -44,6 +44,9 @@
             <a href="#database">Database</a>
           </li>
           <li>
+            <a href="#models">Models</a>
+          </li>
+          <li>
             <a href="#crud">CRUD</a>
           </li>
           <li>
@@ -108,7 +111,7 @@ dalira-template/
         </div>
       </div>
 
-      <h2 class="mt-5 mb-4">CSS & JS Components</h2>
+      <h5 class="mt-4">CSS & JS Components</h5>
       <p>Dalira utilizes <span class="text-primary">Bootstrap 5.0.2</span> as its primary styling framework. This allows for a responsive and modern design, leveraging Bootstrap's grid system and components.</p>
       <p>To modify the styling or update the Bootstrap version, you can make changes in the <span class="text-danger">header.php</span> and the <span class="text-danger">footer.php</span> file.</p>
       <h5>Steps to Change Bootstrap Version or Customize Styles</h5>
@@ -174,6 +177,70 @@ class DBConnection
       </div>
 
       <!-- CRUD -->
+      <h2 id="models" class="mt-5 mb-4">Models</h2>
+      <p>Models are frequently utilized to streamline the handling of database interactions, covering a wide range of tasks including data retrieval, insertion, updating, and deletion. Typically, these models are structured within the specified directory arrangement. Below, you'll find a demonstrative example illustrating the creation of a model designed specifically to execute CRUD (Create, Read, Update, Delete) operations.</p>
+      <div class="card">
+        <div class="card-header text-center"><small>app/models</small></div>
+        <div class="card-body p-0">
+<pre class="shadow-lg rounded mb-0"><code class="language-php hljs py-0">
+&lt;?php
+
+class ModelsFacade extends DBConnection
+{
+
+  function create($data)
+  {
+    $sql = $this-&gt;connect()-&gt;prepare("INSERT INTO dalira_table (data) VALUES (?)");
+    $sql-&gt;execute([$data]);
+    return $sql;
+  }
+
+  function read()
+  {
+    $sql = $this-&gt;connect()-&gt;prepare("SELECT * FROM dalira_table");
+    $sql-&gt;execute();
+    return $sql;
+  }
+
+  function update($data, $id)
+  {
+    $sql = $this-&gt;connect()-&gt;prepare("UPDATE dalira_table SET data = '$data' WHERE id = '$id'");
+    $sql-&gt;execute();
+    return $sql;
+  }
+
+  function delete($id)
+  {
+    $sql = $this-&gt;connect()-&gt;prepare("DELETE FROM dalira_table WHERE id = ?");
+    $sql-&gt;execute([$id]);
+    return $sql;
+  }
+
+}
+
+?&gt;
+
+</code></pre>
+        </div>
+      </div>
+      <h5 class="mt-3">Initializing Models</h5>
+      <p>Once a model is created, it needs to be initialized before it can be utilized on any page. To initialize the model, it should be included in the header file as demonstrated in the code.</p>
+      <div class="card">
+        <div class="card-header text-center"><small>app/layout/header.php</small></div>
+        <div class="card-body p-0">
+<pre class="shadow-lg rounded mb-0"><code class="language-php hljs py-0">
+// Include necessary files for database connectivity and facade classes
+include(__DIR__ . '/../../config/db/connector.php');
+
+include(__DIR__ . '/../../app/models/models-facade.php');
+
+$modelsFacade = new ModelsFacade;
+
+</code></pre>
+        </div>
+      </div>
+
+      <!-- CRUD -->
       <h2 id="crud" class="mt-5 mb-4">CRUD</h2>
       <p>CRUD (Create, Read, Update, Delete) operations form the backbone of data management in web applications, enabling developers to efficiently handle data lifecycles.</p>
       <ul>
@@ -186,11 +253,212 @@ class DBConnection
       <!-- Examples -->
       <h2 id="examples" class="mt-5 mb-4">Examples</h2>
       <ul>
-        <li><a href="#" class="text-primary">Create Operation</a></li>
-        <li><a href="#" class="text-primary">Read Operation</a></li>
-        <li><a href="#" class="text-primary">Update Operation</a></li>
-        <li><a href="#" class="text-primary">Delete Operation</a></li>
+        <li><a href="#" class="text-primary" data-toggle="modal" data-target="#createOperationModal">Create Operation</a></li>
+        <li><a href="#" class="text-primary" data-toggle="modal" data-target="#readOperationModal">Read Operation</a></li>
+        <li><a href="#" class="text-primary" data-toggle="modal" data-target="#updateOperationModal">Update Operation</a></li>
+        <li><a href="#" class="text-primary" data-toggle="modal" data-target="#deleteOperationModal">Delete Operation</a></li>
       </ul>
+    </div>
+  </div>
+
+
+
+  <!-- Modals -->
+  <!-- Create Operation Modal -->
+  <div class="modal fade" id="createOperationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Create Operation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+<pre class="rounded mb-0"><code class="language-php hljs py-0">&lt;?php 
+
+include realpath(__DIR__ . '/app/layout/header.php');
+
+// Check if the form has been submitted
+if (isset($_POST['create'])) {
+  // Retrieve the submitted data from the form
+  $data = $_POST['data'];
+
+  // Validate that the data is not empty
+  if (empty($data)) {
+    // If the data is empty, add an error message to the $invalid array
+    array_push($invalid, "Data should not be empty.");
+  } 
+  
+  // If no validation errors have been encountered
+  if (count($invalid) == 0) {
+    // Attempt to create a new entry with the provided data
+    $create = $modelsFacade->create($data);
+    
+    // Check if the creation was successful
+    if ($create) {
+      // If successful, add a success message to the $success array
+      array_push($success, "Data has been created successfully.");
+    }
+  }
+}
+
+?&gt;
+
+&lt;?php include realpath(__DIR__ . '/errors.php') ?&gt;
+&lt;form action="create.php" method="post"&gt;
+    &lt;input type="text" placeholder="Data" name="data"&gt;
+    &lt;button type="submit" name="create"&gt;Create&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;?php include realpath(__DIR__ . '/app/layout/footer.php') ?&gt;    
+</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Read Operation Modal -->
+  <div class="modal fade" id="readOperationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Read Operation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+<pre class="rounded mb-0"><code class="language-php hljs py-0">&lt;?php include realpath(__DIR__ . '/app/layout/header.php') ?&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Data&lt;/th&gt;
+      &lt;th&gt;Action&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;?php
+    // Fetch the data from the database using the read method
+    $read = $modelsFacade-&gt;read();
+    
+    // Loop through each record returned from the database
+    foreach ($read as $data) { ?&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;?= htmlspecialchars($data['data']) ?&gt;&lt;/td&gt;
+        &lt;td&gt;
+          &lt;a href="update.php?id=&lt;?= htmlspecialchars($data['id']) ?&gt;"&gt;Update&lt;/a&gt;
+          &lt;a href="delete.php?id=&lt;?= htmlspecialchars($data['id']) ?&gt;"&gt;Delete&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;?php } ?&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;?php include realpath(__DIR__ . '/app/layout/footer.php') ?&gt;                                    
+</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Update Operation Modal -->
+   <div class="modal fade" id="updateOperationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Update Operation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+<pre class="rounded mb-0"><code class="language-php hljs py-0">&lt;?php
+
+include realpath(__DIR__ . '/app/layout/header.php');
+
+// Retrieve the id of the selected data
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+}
+
+// Check if the form has been submitted
+if (isset($_POST['update'])) {
+    // Retrieve the submitted data from the form
+    $id = $_POST['id'];
+    $data = $_POST['data'];
+
+    // Validate that the data is not empty
+    if (empty($data)) {
+        // If the data is empty, add an error message to the $invalid array
+        array_push($invalid, "Data should not be empty.");
+    }
+
+    // If no validation errors have been encountered
+    if (count($invalid) == 0) {
+        // Attempt to update provided data
+        $update = $modelsFacade->update($data, $id);
+        
+        // Check if the updation was successful
+        if ($update) {
+            // If successful, add a success message to the $success array
+            array_push($success, "Data has been updated successfully.");
+        }
+    }
+}
+
+?&gt;
+
+&lt;?php include realpath(__DIR__ . '/errors.php') ?&gt;
+&lt;form action="update.php" method="post"&gt;
+    &lt;input type="hidden" name="id" value="&lt;?= $id ?&gt;"&gt;
+    &lt;input type="text" placeholder="Data" name="data"&gt;
+    &lt;button type="submit" name="update"&gt;Update&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;?php include realpath(__DIR__ . '/app/layout/footer.php') ?&gt;                                                  
+</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Operation Modal -->
+  <div class="modal fade" id="deleteOperationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Delete Operation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+<pre class="rounded mb-0"><code class="language-php hljs py-0">&lt;?php
+
+include realpath(__DIR__ . '/app/layout/header.php');
+
+// Retrieve the id of the selected data
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+
+    // Attempt to delete data base from the id
+    $delete = $modelsFacade->delete($id);
+
+    // Check if the deletion was successful
+    if ($delete) {
+        // If successful, add a success message to the $success array
+        array_push($success, "Data has been deleted successfully.");
+    }
+}
+
+?&gt;
+
+&lt;?php include realpath(__DIR__ . '/errors.php') ?&gt;                                        
+</code></pre>
+        </div>
+      </div>
     </div>
   </div>
 
