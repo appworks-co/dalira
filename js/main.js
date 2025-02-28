@@ -7,6 +7,7 @@
   const body = document.body;
   const html = document.documentElement;
 
+  // Full height adjustment function
   var fullHeight = function () {
     $('.js-fullheight').css('height', $(window).height());
     $(window).resize(function () {
@@ -14,16 +15,19 @@
     });
   };
 
-  // fullHeight(); // You might want to enable this if required.
+  fullHeight(); 
 
+  // Function to check if it's mobile
   function isMobile() {
     return window.innerWidth <= 991.98;  // Mobile should be <= 991px
   }
 
+  // Function to check if it's desktop
   function isDesktop() {
     return window.innerWidth > 991.98;  // Desktop should be > 991px
   }
 
+  // Toggle the sidebar behavior
   function toggleSidebar() {
     const isSidebarActive = sidebar.classList.contains('active');
     
@@ -59,8 +63,24 @@
     }
   }
 
+  // Bind the sidebar toggle event
   $('#sidebarCollapse').on('click', function () {
-    toggleSidebar(); // Use the function to toggle sidebar visibility
+    toggleSidebar(); // Toggle the sidebar visibility
+  });
+
+  // Initialize highlight.js for syntax highlighting (after content is loaded)
+  function initializeHighlight() {
+    // Ensure syntax highlighting is applied after the page loads and content is modified
+    if (typeof hljs !== "undefined") {
+      hljs.highlightAll();  // Highlight all code blocks
+    } else {
+      console.error('highlight.js not found or not loaded properly!');
+    }
+  }
+
+  // Run highlight.js after page load or after new content is added
+  $(document).ready(function() {
+    initializeHighlight();
   });
 
 })(jQuery);
