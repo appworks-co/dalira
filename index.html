@@ -75,11 +75,11 @@
       <p>To begin using Dalira, follow these steps:</p>
       <ol>
         <li>Download the framework <a href="./file/dalira-framework-v1.0.0.rar" class="text-primary">here</a>.</li>
-        <li>Extract the files into your project directory.</li>
-        <li>Set up your database configuration in <span class="text-danger">config/db/connector.php</span>.</li>
-        <li>Start building your application!</li>
+        <li>Extract the files into your <span class="text-danger">htdocs</span> folder.</li>
+        <li>Open your browser then type <span class="text-danger">localhost/dalira-framework-v1.0.0/</span></li>
+        <li>You can now start building your application!</li>
       </ol>
-
+      <img src="images/congratulations.png" class="img-fluid" alt="">
       <!-- File Structure -->
       <h2 id="fileStructure" class="mt-5 mb-4">File Structure</h2>
       <p>Dalira follows a clean and organized file structure to ensure maintainability and scalability:</p>
@@ -146,7 +146,7 @@ dalira-template/
       <p>Setting up the database is simple just download the example database from <a href="./file/dalira.rar" class="text-primary">here</a> and import it on your phpmyadmin. After that, you'll need to update the <span class="text-danger">connector.php</span> file located in <span class="text-danger">config/db</span>. Change the private variable db to your desired database name.</p>
       <p>The PHP code defines a class <span class="text-danger">DBConnection</span> with private properties for the database host, user, password, and database name, and includes a protected connect method that constructs a Data Source Name (DSN) to establish a connection using PDO. It handles exceptions by catching PDOException errors and printing them if they occur.</p>
       <div class="card">
-        <div class="card-header text-center"><small>config/db/conn.php</small></div>
+        <div class="card-header text-center"><small>config/db/connector.php</small></div>
         <div class="card-body p-0">
           <pre class="shadow-lg rounded mb-0"><code class="language-php hljs py-0">
 &lt;?php
