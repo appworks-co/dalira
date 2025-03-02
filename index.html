@@ -68,16 +68,16 @@
     <div id="content" class="p-4 p-md-5 pt-5">
       <!-- Introduction -->
       <h2 id="introduction" class="mb-4">Introduction</h2>
-      <p>Dalira is a lightweight PHP framework designed for developers who value elegant syntax, rapid runtime performance, and clean architecture. It promotes a clear separation of concerns, making your web applications organized, maintainable, and scalable.</p>
+      <p>Dalira is a lightweight PHP framework designed for developers who value elegant syntax, rapid runtime performance, and clean architecture. It promotes a clear separation of concerns, enabling web applications to be organized, maintainable, and scalable. The framework emphasizes simplicity and efficiency, allowing developers to build robust applications with minimal overhead. By adhering to best practices and modern design patterns, Dalira ensures that applications remain flexible and easy to extend over time. Its intuitive structure and performance-oriented design make it a suitable choice for projects of varying complexity.</p>
       
       <!-- Getting Started -->
       <h2 id="gettingStarted" class="mt-5 mb-4">Getting Started</h2>
-      <p>To begin using Dalira, follow these steps:</p>
+      <p>To begin using Dalira, the following steps should be followed:</p>
       <ol>
-        <li>Download the framework <a href="./file/dalira-framework-v1.0.0.rar" class="text-primary">here</a>.</li>
-        <li>Extract the files into your <span class="text-danger">htdocs</span> folder.</li>
-        <li>Open your browser then type <span class="text-danger">localhost/dalira-framework-v1.0.0/</span></li>
-        <li>You can now start building your application!</li>
+        <li>The framework can be downloaded <a href="./file/dalira-framework-v1.0.0.rar" class="text-primary">here</a>.</li>
+        <li>The downloaded files should be extracted into the <span class="text-primary">htdocs</span> directory.</li>
+        <li>The browser should be opened, and <a href="http://localhost/dalira-framework-v1.0.0/" class="text-primary" target="_blank">http://localhost/dalira-framework-v1.0.0/</a> should be entered into the address bar.</li>
+        <li>Once the setup is complete, the user can proceed to build their application using the framework.</li>
       </ol>
       <img src="images/congratulations.png" class="img-fluid" alt="">
       <!-- File Structure -->
@@ -99,14 +99,27 @@ dalira-template/
 
       <!-- Starter Template -->
       <h2 id="starterTemplate" class="mt-5 mb-4">Starter Template</h2>
-      <p>Create a new <span class="text-danger">filename.php</span> file in the root project. Include the <span class="text-danger">header.php</span> and <span class="text-danger">footer.php</span> files from a specified directory using their absolute paths. This method ensures that the files are included regardless of the current directory, allowing for consistent page structure.</p>
+      <p>To create a new <span class="text-danger">filename.php</span> file in the root project and include the <span class="text-danger">header.php</span> and <span class="text-danger">footer.php</span> files using their absolute paths, follow these steps:</p>
+      <ol>
+        <li>Create the <span class="text-danger">filename.php</span> file: <br> - In the root directory of the project, create a new file named <span class="text-danger">filename.php</span>.</li>
+        <li>Include <span class="text-danger">header.php</span> and <span class="text-danger">footer.php</span> using absolute paths: <br> - Use PHP's <span class="text-primary">include</span> statement with the absolute paths to ensure the files are included consistently, regardless of the current working directory.</li>
+      </ol>
       <div class="card">
         <div class="card-header text-center"><small>filename.php</small></div>
         <div class="card-body p-0">
           <pre class="shadow-lg rounded mb-0"><code class="language-php hljs py-0">
-&lt;?php include realpath(__DIR__ . '/app/layout/header.php') ?&gt;
-&lt;h1&gt;Hello world!&lt;/h1&gt;
-&lt;?php include realpath(__DIR__ . '/app/layout/footer.php') ?&gt;
+&lt;?php 
+// Include the header.php file using its absolute path
+include realpath(__DIR__ . '/app/layout/header.php');
+?&gt;
+
+&lt;h1&gt;Welcome to My Page&lt;/h1&gt;
+&lt;p&gt;This is the main content of the page.&lt;/p&gt;
+
+&lt;?php 
+// Include the footer.php file using its absolute path
+include realpath(__DIR__ . '/app/layout/footer.php');
+?&gt;
           </code></pre>
         </div>
       </div>
@@ -123,6 +136,7 @@ dalira-template/
         <div class="card-header text-center"><small>app/layout/header.php</small></div>
         <div class="card-body p-0">
           <pre class="shadow-lg rounded mb-0"><code class="language-html hljs py-0">
+&lt;!-- Bootstrap CSS --&gt;
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"&gt;
           </code></pre>
         </div>
@@ -135,6 +149,7 @@ dalira-template/
         <div class="card-header text-center"><small>app/layout/footer.php</small></div>
         <div class="card-body p-0">
           <pre class="shadow-lg rounded mb-0"><code class="language-html hljs py-0">
+&lt;!-- Bootstrap JS --&gt;
 &lt;script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"&gt;&lt;/script&gt;
 &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"&gt;&lt;/script&gt;
           </code></pre>
@@ -143,8 +158,33 @@ dalira-template/
 
       <!-- Database -->
       <h2 id="database" class="mt-5 mb-4">Database</h2>
-      <p>Setting up the database is simple just download the example database from <a href="./file/dalira.rar" class="text-primary">here</a> and import it on your phpmyadmin. After that, you'll need to update the <span class="text-danger">connector.php</span> file located in <span class="text-danger">config/db</span>. Change the private variable db to your desired database name.</p>
-      <p>The PHP code defines a class <span class="text-danger">DBConnection</span> with private properties for the database host, user, password, and database name, and includes a protected connect method that constructs a Data Source Name (DSN) to establish a connection using PDO. It handles exceptions by catching PDOException errors and printing them if they occur.</p>
+      <p>Setting up the database is simple just download the example database and import it on your phpmyadmin. After that, you'll need to update the <span class="text-danger">connector.php</span> file located in <span class="text-primary">config/db</span>. Change the private variable db to your desired database name.</p>
+      <h5>Steps for setting up the database</h5>
+      <ol>
+        <li>Download the example database file <a href="./file/dalira.rar" class="text-primary">here</a>.</li>
+        <li>Open your web browser and navigate to <a href="http://localhost/phpmyadmin/" class="text-danger" target="_blank">http://localhost/phpmyadmin/</a></li>
+        <li>Create a New Database</li>
+        <ul>
+          <li>In phpMyAdmin, click on the <span class="text-primary">Database</span> tab at the top.</li>
+          <li>Enter a name for your new database (e.g., dalira) in the <span class="text-primary">Create database</span> field.</li>
+          <li>Select the appropriate collation (e.g., utf8mb4_general_ci).</li>
+          <li>Click the <span class="text-primary">Create</span> button to create the database.</li>
+        </ul>
+        <li>Import the Example Database</li>
+        <ul>
+          <li>After creating the database, select it from the left-hand sidebar in phpMyAdmin.</li>
+          <li>Click on the <span class="text-primary">Import</span> tab at the top.</li>
+          <li>Under the <span class="text-primary">File to import</span> section, click <span class="text-primary">Choose File</span> and select the downloaded example database file (e.g., dalira.sql).</li>
+          <li>Ensure the format is set to <span class="text-primary">SQL</span>.</li>
+          <li>Click the <span class="text-primary">Go</span> button at the bottom to import the database.</li>
+          <li>Once the import is complete, you should see a success message, and the database tables will be listed.</li>
+        </ul>
+        <li>Update the <span class="text-danger">connector.php</span> file</li>
+        <ul>
+          <li>Navigate to the <span class="text-primary">config/db</span> directory in your project.</li>
+          <li>Open the <span class="text-danger">connector.php</span> file in a text editor or IDE. <br> - The file contains a <span class="text-primary">DBConnection</span> class with private properties for the database connection details. Update the db property to match the name of the database you created in Step 3.</li>
+        </ul>
+      </ol>
       <div class="card">
         <div class="card-header text-center"><small>config/db/connector.php</small></div>
         <div class="card-body p-0">
@@ -153,20 +193,26 @@ dalira-template/
 
 class DBConnection
 {
-  private $host = "localhost";
-  private $user = "root";
-  private $pass = "";
-  private $db = "dalira";
+  // Database connection properties
+  private $host = "localhost"; // Database host
+  private $user = "root";      // Database username
+  private $pass = "";          // Database password
+  private $db = "dalira";      // Database name (update this)
 
+  // Method to establish a database connection
   protected function connect()
   {
     try {
-      $dsn = 'mysql:host=' &gt; . $this-&gt;host . ';dbname=' &gt; . $this-&gt;db;
+      // Construct the Data Source Name (DSN)
+      $dsn = 'mysql:host=' . $this-&gt;host . ';dbname=' . $this-&gt;db;
+      // Create a new PDO instance
       $pdo = new PDO($dsn, $this-&gt;user, $this-&gt;pass);
+      // Set PDO error mode to exception
       $pdo-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       return $pdo;
     } catch (PDOException $e) {
-      print_r($e);
+      // Handle connection errors
+      die('Connection failed: ' . $e->getMessage());
     }
   }
 }
@@ -178,41 +224,92 @@ class DBConnection
 
       <!-- CRUD -->
       <h2 id="models" class="mt-5 mb-4">Models</h2>
-      <p>Models are frequently utilized to streamline the handling of database interactions, covering a wide range of tasks including data retrieval, insertion, updating, and deletion. Typically, these models are structured within the specified directory arrangement. Below, you'll find a demonstrative example illustrating the creation of a model designed specifically to execute CRUD (Create, Read, Update, Delete) operations.</p>
+      <p>Models are an essential part of any application that interacts with a database. They simplify database operations by encapsulating data retrieval, insertion, updating, and deletion logic. This documentation provides an overview of how to create and use models in your application, along with an example demonstrating CRUD (Create, Read, Update, Delete) operations.</p>
       <div class="card">
         <div class="card-header text-center"><small>app/models</small></div>
         <div class="card-body p-0">
 <pre class="shadow-lg rounded mb-0"><code class="language-php hljs py-0">
 &lt;?php
 
+/**
+ * ModelsFacade Class
+ * 
+ * This class extends the DBConnection class and provides a facade for performing CRUD operations
+ * on the `dalira_table` in the database. It uses prepared statements with bound parameters to
+ * ensure security and prevent SQL injection attacks.
+ */
 class ModelsFacade extends DBConnection
 {
 
+  /**
+   * Create a new record in the `dalira_table`.
+   * 
+   * @param string $data The data to be inserted into the `data` column of the `dalira_table`.
+   * @return PDOStatement Returns the executed PDOStatement object.
+   */
   function create($data)
   {
-    $sql = $this-&gt;connect()-&gt;prepare("INSERT INTO dalira_table (data) VALUES (?)");
-    $sql-&gt;execute([$data]);
+    // Prepare the SQL statement to insert data into the `dalira_table`.
+    $sql = $this->connect()->prepare("INSERT INTO dalira_table (data) VALUES (?)");
+    
+    // Execute the prepared statement with the provided data.
+    $sql->execute([$data]);
+    
+    // Return the executed PDOStatement object.
     return $sql;
   }
 
+  /**
+   * Read all records from the `dalira_table`.
+   * 
+   * @return PDOStatement Returns the executed PDOStatement object containing all records.
+   */
   function read()
   {
-    $sql = $this-&gt;connect()-&gt;prepare("SELECT * FROM dalira_table");
-    $sql-&gt;execute();
+    // Prepare the SQL statement to select all records from the `dalira_table`.
+    $sql = $this->connect()->prepare("SELECT * FROM dalira_table");
+    
+    // Execute the prepared statement.
+    $sql->execute();
+    
+    // Return the executed PDOStatement object.
     return $sql;
   }
 
+  /**
+   * Update a record in the `dalira_table` based on the provided `id`.
+   * 
+   * @param string $data The new data to update in the `data` column.
+   * @param int $id The `id` of the record to be updated.
+   * @return PDOStatement Returns the executed PDOStatement object.
+   */
   function update($data, $id)
   {
-    $sql = $this-&gt;connect()-&gt;prepare("UPDATE dalira_table SET data = '$data' WHERE id = '$id'");
-    $sql-&gt;execute();
+    // Prepare the SQL statement to update a record in the `dalira_table` using bound parameters.
+    $sql = $this->connect()->prepare("UPDATE dalira_table SET data = ? WHERE id = ?");
+    
+    // Execute the prepared statement with the provided data and id.
+    $sql->execute([$data, $id]);
+    
+    // Return the executed PDOStatement object.
     return $sql;
   }
 
+  /**
+   * Delete a record from the `dalira_table` based on the provided `id`.
+   * 
+   * @param int $id The `id` of the record to be deleted.
+   * @return PDOStatement Returns the executed PDOStatement object.
+   */
   function delete($id)
   {
-    $sql = $this-&gt;connect()-&gt;prepare("DELETE FROM dalira_table WHERE id = ?");
-    $sql-&gt;execute([$id]);
+    // Prepare the SQL statement to delete a record from the `dalira_table`.
+    $sql = $this->connect()->prepare("DELETE FROM dalira_table WHERE id = ?");
+    
+    // Execute the prepared statement with the provided `id`.
+    $sql->execute([$id]);
+    
+    // Return the executed PDOStatement object.
     return $sql;
   }
 
@@ -224,7 +321,7 @@ class ModelsFacade extends DBConnection
         </div>
       </div>
       <h5 class="mt-3">Initializing Models</h5>
-      <p>Once a model is created, it needs to be initialized before it can be utilized on any page. To initialize the model, it should be included in the header file as demonstrated in the code.</p>
+      <p>Once a model is created, it needs to be initialized before it can be utilized on any page. To initialize the model, it should be included in the <span class="text-danger">header.php</span> as demonstrated in the code.</p>
       <div class="card">
         <div class="card-header text-center"><small>app/layout/header.php</small></div>
         <div class="card-body p-0">
@@ -244,10 +341,10 @@ $modelsFacade = new ModelsFacade;
       <h2 id="crud" class="mt-5 mb-4">CRUD</h2>
       <p>CRUD (Create, Read, Update, Delete) operations form the backbone of data management in web applications, enabling developers to efficiently handle data lifecycles.</p>
       <ul>
-        <li><span class="text-danger">Create</span> use for the addition of new records.</li>
-        <li><span class="text-danger">Read</span> use for the retrieval of created records.</li>
-        <li><span class="text-danger">Update</span> use for the modification of existing records.</li>
-        <li><span class="text-danger">Delete</span> use for the removal of existing records.</li>
+        <li><span class="text-primary">Create</span> use for the addition of new records.</li>
+        <li><span class="text-primary">Read</span> use for the retrieval of created records.</li>
+        <li><span class="text-primary">Update</span> use for the modification of existing records.</li>
+        <li><span class="text-primary">Delete</span> use for the removal of existing records.</li>
       </ul>
 
       <!-- Examples -->
